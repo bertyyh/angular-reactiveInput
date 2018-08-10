@@ -1,0 +1,30 @@
+<form #myForm="ngForm" novalidate>
+<div>用户名:
+  <input type="text" ngModel required minlength="6" name="username" (input)="onMobileInput(myForm)">
+  <div [hidden]="mobileValida || mobileUntouched">
+    <div [hidden]="!myForm.form.hasError('required','username')">
+      用户名为必填项
+    </div>
+    <div [hidden]="!myForm.form.hasError('minlength','username')">
+      用户名最小长度为6
+    </div>
+  </div>
+</div>
+  <div>手机号:
+    <input type="number" ngModel name="mobile" mobile >
+    <div [hidden]="!myForm.form.hasError('mobile','mobile')">
+      请输入正确手机号
+    </div>
+  </div>
+  <div ngModelGroup="passwordGroup" equal>
+    <div>密码:<input type="password" ngModel minlength="6" name="password"></div>
+    <div [hidden]="!myForm.form.hasError('minlength',['passwordGroup','password'])">
+      密码最小长度为6
+    </div>
+    <div>确认密码:<input type="password" ngModel name="pconfirm"></div>
+    <div [hidden]="!myForm.form.hasError('equal','passwordGroup')">
+      {{myForm.form.getError('equal','passwordGroup')?.descx}}
+    </div>
+  </div>
+<button (click)="onSubmit(myForm.value,myForm.valid)">注册</button>
+</form>

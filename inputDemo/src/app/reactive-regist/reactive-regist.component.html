@@ -1,0 +1,44 @@
+<form [formGroup]="formMoudel">
+  <div>姓名:
+    <input type="text" formControlName="username">
+  </div>
+  <div [hidden]="formMoudel.get('username').valid || formMoudel.get('username').untouched">
+    <div [hidden]="!formMoudel.hasError('required','username')">姓名为必填项</div>
+    <div [hidden]="!formMoudel.hasError('minlength','username')">姓名最小长度为6</div>
+  </div>
+  <div>电话号码:
+    <input type="text" formControlName="mobile">
+  </div>
+  <div [hidden]="formMoudel.get('mobile').valid || formMoudel.get('mobile').pristine">
+    <div [hidden]="!formMoudel.hasError('mobile','mobile')">请输入正确电话号码</div>
+  </div>
+  <div>
+    <label>男:
+      <input type="radio" name="sex" value="男" formControlName="sex">
+    </label>
+    <label>女:
+      <input type="radio" name="sex" value="女" formControlName="sex">
+    </label>
+  </div>
+  <div>
+    <label>兴趣爱好:</label>
+    <div class="checkbox">
+      <label *ngFor="let item of hobbyList" class="checkbox-inline">
+        <input type="checkbox" (click)="selectCheckbox($event.target.checked,item)"> {{item}}
+      </label>
+    </div>
+  </div>
+  <div formGroupName="passwordsGroup">
+    <div>密码:
+      <input type="password" formControlName="password">
+      <div [hidden]="!formMoudel.hasError('minlength',['passwordsGroup','password'])">密码最小长度为6</div>
+    </div>
+    <div>确认:
+      <input type="password" formControlName="pconfirm">
+    </div>
+    <div [hidden]="!formMoudel.hasError('equal','passwordsGroup')">
+      {{formMoudel.getError('equal','passwordsGroup')?.descx}}
+    </div>
+  </div>
+  <button type="button" (click)="onSubmit()">提交</button>
+</form>
