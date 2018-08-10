@@ -26,7 +26,10 @@ export class ReactiveRegistComponent implements OnInit {
    }
 
   onSubmit () {
-    console.log(this.formMoudel.value);
+    this.formMoudel.value['checked'] = this.selectHobby;
+    if (this.formMoudel.valid) {
+      console.log(this.formMoudel.value);
+    }
   }
   selectCheckbox (check: boolean, value: string) {
     var index: number = this.selectHobby.indexOf(value);
@@ -41,7 +44,6 @@ export class ReactiveRegistComponent implements OnInit {
         })
       }
     }
-    this.formMoudel.value['checked'] = this.selectHobby
     console.log(this.selectHobby);
   }
   ngOnInit() {
