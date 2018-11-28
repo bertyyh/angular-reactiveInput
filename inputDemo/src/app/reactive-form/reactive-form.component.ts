@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl, FormArray} from "@angular/forms";
+import { FormGroup, Validators, FormControl, FormArray} from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-form',
@@ -8,7 +8,7 @@ import { FormGroup, Validators, FormControl, FormArray} from "@angular/forms";
 })
 export class ReactiveFormComponent implements OnInit {
 
-  formModel:FormGroup = new FormGroup({
+  formModel: FormGroup = new FormGroup({
     dateRange: new FormGroup({
       from: new FormControl(),
       to: new FormControl()
@@ -28,12 +28,12 @@ export class ReactiveFormComponent implements OnInit {
     console.log(this.formModel.value);
   }
   addEmail () {
-    let emails = this.formModel.get('emails') as FormArray;
+    const emails = this.formModel.get('emails') as FormArray;
     emails.push(new FormControl());
   }
 
   getEmailArr () {
     console.log(this.formModel.get('emails')['controls']);
-    return this.formModel.get('emails')
+    return this.formModel.get('emails');
   }
 }
